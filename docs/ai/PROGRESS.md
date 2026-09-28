@@ -1,7 +1,8 @@
 # PROGRESS — living build tracker
 
-**Current position:** PHASE 00 ✅ COMPLETE. Starting PHASE-01 (scaffold + repo + CI) via first
-DeepSeek session — see phases/phase-01-scaffold.md.
+**Current position:** PHASE 01 ✅ COMPLETE — public repo, CI, APK-to-Releases, Pages live, phone
+install verified. Next: architect delivers MASTER-SPEC Phase 3 (Data Architecture); Phase 02
+(auth + app lock) is authored from it. No app code beyond scaffold until then.
 **How to update:** verification log gets one row per completed task; checkboxes flip only with
 evidence (command output). The human commits after each verified task.
 
@@ -13,7 +14,7 @@ evidence (command output). The human commits after each verified task.
 | Phase | Name | State |
 |---|---|---|
 | 00 | Environment setup | **done ✅** |
-| 01 | Project scaffold + Supabase-free repo + GitHub CI | in progress |
+| 01 | Project scaffold + Supabase-free repo + GitHub CI | **done ✅** |
 | 02 | Auth + app lock + session model | pending (awaits spec Phase 3–4) |
 | 03 | Core ledger: categories, wallets, outbox, sync | pending |
 | 04 | Expense/income/transfer entry + autocomplete + splits + receipts | pending |
@@ -24,15 +25,15 @@ evidence (command output). The human commits after each verified task.
 | 09 | MVP hardening + deploy (incl. OQ-1 go-live hosting decision) | pending |
 | 10+ | v1.1: vault, trackers, insurance/recurring, Telegram bot, reminders | pending |
 
-## Phase 01 task board (detail: phases/phase-01-scaffold.md)
+## Phase 01 task board — final ✅
 
-- [ ] t01.1 Flutter scaffold `household_finance_os` (org com.hfos, android+web), runs on Chrome
-- [ ] t01.2 Control docs imported from docs-control-pack.zip + README
-- [ ] t01.3 git init (main) + hardened .gitignore + first commit
-- [ ] t01.4 Public repo `household-finance-os` created + pushed
-- [ ] t01.5 build.yml CI green: APK → "Dev build (latest)" release; Web → Pages (Pages source = GitHub Actions)
-- [ ] t01.6 Phone install from Releases (no login, no USB debugging) + Pages URL loads
-- [ ] t01.7 Tracker close-out commit + architect report
+- [x] t01.1 Flutter scaffold `household_finance_os` (org com.hfos, android+web), runs on Chrome
+- [x] t01.2 Control docs imported from docs-control-pack.zip + README
+- [x] t01.3 git init (main) + hardened .gitignore + first commit
+- [x] t01.4 Public repo `household-finance-os` created + pushed
+- [x] t01.5 build.yml CI green: APK → "Dev build (latest)" release; Web → Pages (Pages source = GitHub Actions)
+- [x] t01.6 Phone install from Releases (no login, no USB debugging) + Pages URL loads
+- [x] t01.7 Tracker close-out commit + architect report
 
 ## Phase 00 task board — final ✅
 
@@ -54,6 +55,13 @@ evidence (command output). The human commits after each verified task.
 | 2026-09-28 | owner | t00.2fix, t00.5, t00.7 | PASS | `flutter doctor` + `flutter devices` pasted |
 | 2026-09-28 | owner | t00.8(Chrome), t00.9 | PASS (reported) | "All done"; keys stored offline, never pasted |
 | 2026-09-28 | owner + architect | A-01 dev-loop amendment; sharing policy; anti-drift protocol; decision №13; OQ-1 | LOGGED | MASTER-SPEC appendix; AI-CONTEXT; AI-SHARING-POLICY.md |
+| 2026-09-28 | DeepSeek + owner | t01.1 | PASS | `flutter create` 42 files; counter ran in Chrome (increment confirmed); `flutter analyze` → No issues found (12.8s); Flutter 3.47.5 stable / Dart 3.13.4 |
+| 2026-09-28 | DeepSeek + owner | t01.2 | PASS | docs/ 10 files at repo root (Test-Path True True); README replaced (non-default, no secrets); flutter analyze No issues (7.6s); git status check deferred to t01.3 per owner pick (a) |
+| 2026-09-28 | DeepSeek + owner | t01.3 | PASS | Fresh `git init` on `main`; secrets block appended to `.gitignore`; first commit `1b3cfbb` (`phase-01: flutter scaffold + control docs`, 44 files, 2154 insertions); working tree clean |
+| 2026-09-28 | DeepSeek + owner | t01.4 | PASS | Public repo `divathed3vil-sys/household-finance-os` created (no template files); pushed `1b3cfbb` (73 objects, 86.37 KiB); upstream tracking set; remote shows exactly 1 commit with `docs/` + `lib/`; silent auth via cached Credential Manager creds |
+| 2026-09-28 | DeepSeek + owner | t01.5 | PASS | `build.yml` byte-faithful (`576c490`); both CI jobs green; Release `dev-latest` "Dev build (latest)" pre-release with `app-debug.apk` (143 MB fat debug, expected); Pages live at divathed3vil-sys.github.io/household-finance-os/ showing counter app |
+| 2026-09-28 | DeepSeek + owner | t01.6 | PASS | Phone installed `app-debug.apk` from Releases (no login, Developer Options OFF throughout); "install unknown apps" granted once; counter runs; Pages URL loads in browser |
+| 2026-09-28 | DeepSeek + owner | t01.7 | PASS | Tracker close-out commit `phase-01: close-out (tracker)`; all 7 Phase-01 tasks [x]; architect report delivered |
 
 ## Backlog (discovered follow-ups — NOT current work)
 
@@ -64,3 +72,5 @@ evidence (command output). The human commits after each verified task.
 | Set `redhat.telemetry.enabled: false` in VS Code settings | architect | 02 |
 | App signing (release keystore) before wider distribution | architect | 09 |
 | doc-sync ritual: repo `docs/` is canonical after t01.2; workspace is architect's authoring copy — owner re-copies changed docs and commits `docs: sync` when told | architect | continuous |
+| Consider `.gitattributes` (`* text=auto eol=lf`) if cross-platform LF consistency ever needed | t01.3 obs. | 09 |
+| Optionally switch CI APK build to `--split-per-abi` to shrink debug APK (~143 MB → ~50–60 MB/device) | t01.5 obs. | 09 |
